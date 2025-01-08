@@ -310,7 +310,7 @@ if(first()){
     D += (Driver:keyRight()*2-1)*0.2
     D = clamp(D,0,1)
     Shift += (Driver:keySprint()*2-1)*0.2
-    Shift = clamp(Shift,0,1)*!M1
+    Shift = clamp(Shift,0,max(W,S,A,D))*!M1
     if(changed(Driver:keySprint())&Driver:keySprint()){
         entity():soundPlay("sprint",0,"player/suit_sprint.wav")
         soundVolume("sprint",5)
