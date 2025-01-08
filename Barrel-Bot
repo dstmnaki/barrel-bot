@@ -56,7 +56,7 @@ if(first()){
     holoCreate(I)
     holoPos(I,E:toWorld(vec(0,0,0)))
     holoAng(I,E:toWorld(ang(0,0,0)))
-    holoParent(I,E)
+    #holoParent(I,E)
     holoScale(I,vec())
     
     I = 2
@@ -64,7 +64,7 @@ if(first()){
     holoCreate(I)
     holoPos(I,E:toWorld(vec(0,0,0)))
     holoAng(I,E:toWorld(ang(0,0,0)))
-    holoParent(I,E)
+    #holoParent(I,E)
     holoScale(I,vec())
     
     
@@ -415,6 +415,9 @@ if(first()){
     }
     local Upright_Force=entity():toLocal(ang(0,HoldAng:yaw(),0))*25
     local Ang_Damping_Force=-entity():angVel()
+    holoPos(1,entity():pos())
+    holoAng(1,entity():angles())
+    
     entity():applyAngForce((Upright_Force+Ang_Damping_Force)*entity():mass()*TransformVal)
     holoPos(2,entity():toWorld(vec(0,0,-15+5*sin((-0.05+Step_Lerp)*180)*clamp(entity():vel():length()*0.1,0,1))*TransformVal))
     holoAng(2,entity():toWorld(ang(0,Spin,0):rotateAroundAxis(vec(0,1,0),10*On_Ground)*SpinMix+ang(clamp(entity():vel():z()*0.1,-15,15)*!On_Ground*(1-SpinMix)-(clamp(entity():velL():x()*0.1,-60,60)*(1-SpinMix)+10*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix))*On_Ground,0,(clamp(entity():velL():y()*0.15,-60,60)*(1-SpinMix)+5*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix)*(Step-!Step))*On_Ground)*TransformVal))
