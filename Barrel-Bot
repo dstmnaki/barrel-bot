@@ -453,6 +453,10 @@ if(first()){
     
     HitProp:applyForce(((holoEntity(2):toWorld(vec(0,0,25))-HitProp:pos())*25-HitProp:vel())*HitProp:mass())
     HitProp:applyAngForce((HitProp:toLocal(holoEntity(2):angles())*25-HitProp:angVel())*25*HitProp:mass())
+    if(M1){
+        HitProp:setPos((entity():pos()+vec(0,0,5)))
+    }
+    HitProp:propFreeze(!M1)
     noCollideAll(HitProp,!M1)
     
     #Seat:driver():plySetPos(vec(7777777))
