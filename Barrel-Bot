@@ -310,7 +310,7 @@ if(first()){
     D += (Driver:keyRight()*2-1)*0.2
     D = clamp(D,0,1)
     Shift += (Driver:keySprint()*2-1)*0.2
-    Shift = clamp(Shift,0,1-S)*!M1
+    Shift = clamp(Shift,0,1)*!M1
     if(changed(Driver:keySprint())&Driver:keySprint()){
         entity():soundPlay("sprint",0,"player/suit_sprint.wav")
         soundVolume("sprint",5)
@@ -396,7 +396,7 @@ if(first()){
     
     
     if(Moving){
-        HoldAng=Movement_Direction:toAngle():setYaw(Driver:eyeAngles():yaw()*Driver:keyBack()+max(entity():vel(),entity():forward()):toAngle():yaw()*(!Driver:keyBack()))
+        HoldAng=Movement_Direction:toAngle():setYaw(max(entity():vel(),entity():forward()):toAngle():yaw())
     }
     local Upright_Force=entity():toLocal(ang(0,HoldAng:yaw(),0))*25
     local Ang_Damping_Force=-entity():angVel()
