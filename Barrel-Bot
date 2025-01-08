@@ -1,0 +1,406 @@
+@name Barrel-Bot
+@model models/props_c17/oildrum001.mdl
+@persist [DriverTarget Seat]:entity Step_Lerp Step Transform TransformVal HoldAng:angle Jumping Delta Delta2 W S A D Shift
+@persist [Walk_Speed Run_Speed]
+if(first()){
+    noCollideAll(entity(),1)
+    propSpawnUndo(0)
+    Seat = seatSpawn("models/nova/airboat_seat.mdl",1)
+    Seat:propNotSolid(1)
+    Seat:propDraw(0)
+    Seat:setPos(entity():toWorld(vec(0,0,0)))
+    Seat:setAng(entity():angles())
+    noCollideAll(entity(),0)
+    DriverTarget = owner()#findPlayerByName("naki")#owner()#
+    
+    Run_Speed=400
+    Walk_Speed=80
+    
+    Delta=curtime()
+    
+    setName("Barrel-Bot ["+owner():name()+"]")
+    
+    entity():propDraw(0)
+    
+    I = 1
+    local E = entity()
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoParent(I,E)
+    holoScale(I,vec())
+    
+    I = 2
+    local E = holoEntity(1)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoParent(I,E)
+    holoScale(I,vec())
+    
+    
+    I = 3
+    local E = holoEntity(2)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(5,0,11),vec(1,0,0),0)
+    holoParent(I,E)
+    
+    I = 14
+    local E = holoEntity(3)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(-5,0,11),vec(-1,0,0),0)
+    holoParent(I,E)
+    
+    I = 4
+    local E = holoEntity(3)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoScale(I,vec(-1,1,1))
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoParent(I,E)
+    
+    
+    I = 5
+    local E = holoEntity(2)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,6)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1)
+    holoClip(I,vec(0,0,11+23),vec(0,0,1),0)
+    holoParent(I,E)
+    
+    I = 6
+    local E = holoEntity(5)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoScale(I,vec(-1,1,1))
+    holoClipEnabled(I,1)
+    holoClip(I,vec(0,0,11+23),vec(0,0,1),0)
+    holoParent(I,E)
+    
+    I = 7
+    local E = holoEntity(1)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,7,-15)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClip(I,3,vec(0,0,11),vec(0,0,-1),0)
+    holoClip(I,4,vec(0,0,0),vec(0,1,0),0)
+    holoParent(I,E)
+    
+    I = 8
+    local E = holoEntity(7)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoScale(I,vec(-1,1,1))
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClip(I,3,vec(0,0,11),vec(0,0,-1),0)
+    holoClip(I,4,vec(0,0,0),vec(0,1,0),0)
+    holoParent(I,E)
+    
+    
+    I = 9
+    local E = holoEntity(1)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,-7,-15)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClip(I,3,vec(0,0,11),vec(0,0,-1),0)
+    holoClip(I,4,vec(0,0,0),vec(0,-1,0),0)
+    holoParent(I,E)
+    
+    I = 10
+    local E = holoEntity(9)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoScale(I,vec(-1,1,1))
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClip(I,3,vec(0,0,11),vec(0,0,-1),0)
+    holoClip(I,4,vec(0,0,0),vec(0,-1,0),0)
+    holoParent(I,E)
+    
+    
+    I = 11
+    local E = holoEntity(3)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,12)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoScale(I,vec(-1*0.95,1*0.95,0.7))
+    holoParent(I,E)
+    holoColor(I,vec())
+    
+    I = 12
+    local E = holoEntity(5)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(7,3,30)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/hunter/misc/sphere025x025.mdl")
+    holoMaterial(I,"models/debug/debugwhite")
+    holoScale(I,vec(0.2))
+    holoParent(I,E)
+    holoDisableShading(I,1)
+    
+    I = 13
+    local E = holoEntity(5)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(7,-3,30)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/hunter/misc/sphere025x025.mdl")
+    holoMaterial(I,"models/debug/debugwhite")
+    holoScale(I,vec(0.2))
+    holoParent(I,E)
+    holoDisableShading(I,1)
+    
+    I = 15
+    local E = holoEntity(2)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClipEnabled(I,5,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(-5,0,11),vec(1,0,0),0)
+    holoClip(I,4,vec(5,0,11),vec(-1,0,0),0)
+    holoClip(I,5,vec(0,0,11),vec(0,1,0),0)
+    holoParent(I,E)
+    
+    I = 16
+    local E = holoEntity(15)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClipEnabled(I,5,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(-5,0,11),vec(1,0,0),0)
+    holoClip(I,4,vec(5,0,11),vec(-1,0,0),0)
+    holoClip(I,5,vec(0,0,11),vec(0,1,0),0)
+    holoScale(I,vec(1,-1,1))
+    holoParent(I,E)
+    
+    
+    I = 17
+    local E = holoEntity(2)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClipEnabled(I,5,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(-5,0,11),vec(1,0,0),0)
+    holoClip(I,4,vec(5,0,11),vec(-1,0,0),0)
+    holoClip(I,5,vec(0,0,11),vec(0,-1,0),0)
+    holoParent(I,E)
+    
+    I = 18
+    local E = holoEntity(17)
+    holoCreate(I)
+    holoPos(I,E:toWorld(vec(0,0,0)))
+    holoAng(I,E:toWorld(ang(0,0,0)))
+    holoModel(I,"models/props_c17/oildrum001.mdl")
+    holoClipEnabled(I,1,1)
+    holoClipEnabled(I,2,1)
+    holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
+    holoClipEnabled(I,5,1)
+    holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
+    holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
+    holoClip(I,3,vec(-5,0,11),vec(1,0,0),0)
+    holoClip(I,4,vec(5,0,11),vec(-1,0,0),0)
+    holoClip(I,5,vec(0,0,11),vec(0,-1,0),0)
+    holoScale(I,vec(1,-1,1))
+    holoParent(I,E)
+    
+    Skin=randint(0,6)
+    for(I=1,18){
+        holoSkin(I,Skin)
+    }
+    
+    entity():propSetVelocity(vec())
+    entity():propFreeze(0)
+    
+    hint("Controls in chat!",7)
+    print("~Barrel-Bot by Naki~")
+    print("Press M to enter!")
+    print("WASD - Move")
+    print("Shift - Run")
+    print("Space - Jump")
+    print("R - Transform")
+    
+    
+    timer("update",50)
+}elseif(clk("update")){
+    timer("update",50)
+    
+    Driver = Seat:driver()
+    W += (Driver:keyForward()*2-1)*0.2
+    W = clamp(W,0,1)
+    A += (Driver:keyLeft()*2-1)*0.2
+    A = clamp(A,0,1)
+    S += (Driver:keyBack()*2-1)*0.2
+    S = clamp(S,0,1)
+    D += (Driver:keyRight()*2-1)*0.2
+    D = clamp(D,0,1)
+    Shift += (Driver:keySprint()*2-1)*0.2
+    Shift = clamp(Shift,0,1-S)
+    Space = Driver:keyJump()
+    R = Driver:keyReload()
+    
+    Active = Driver:isPlayer()
+    
+    Seat:setPos(entity():toWorld(vec(0,0,15)))
+    Seat:setAng(ang())
+    if(changed(Active)){
+        if(Active){
+            owner():setMaterial("null")
+        }else{
+            owner():setMaterial("")
+        }
+    }
+    if(DriverTarget:keyPressed("m")){
+        #DriverTarget:plyEnterVehicle(Seat)
+        Seat:use()
+    }
+    
+    TransformVal+=0.2*(Transform-!Transform)
+    TransformVal=clamp(TransformVal,0,1)
+    if(changed(TransformVal)&TransformVal==0){
+        entity():emitSound("physics/metal/metal_barrel_impact_soft3.wav",90,80)
+    }
+    rangerFilter(entity())
+    Ground_Ranger=rangerOffsetHull(((15)*2),entity():toWorld(vec(0,0,1)),vec(0,0,-1),vec(24,24,0))
+    Distance=Ground_Ranger:distance()-1
+    On_Ground=(Ground_Ranger:distance()<20)*!Jumping
+    Movement_Direction=vec(W-S,A-D,0):rotateAroundAxis(vec(0,0,1),owner():eyeAngles():yaw()):normalized()*On_Ground
+    Moving=(abs(Movement_Direction:length())>0.1)*On_Ground
+    if(changed(Driver:keyPressed("R"))&Driver:keyPressed("R")){
+        Transform=!Transform
+        entity():propSetVelocity(entity():vel()+vec(0,0,7*On_Ground)*entity():mass()*On_Ground)
+        #entity():emitSound("NPC_dog.Pneumatic_1",90,90)
+    }
+    if(changed(Driver:keyJump())&Driver:keyJump()&On_Ground&(TransformVal==1|TransformVal==0)){
+        Jumping=1
+        entity():propSetVelocity((entity():vel()*(TransformVal==0))+((entity():forward()*5*(TransformVal==1))+vec(0,0,TransformVal==0 ? 5 : 20))*entity():mass()*2)
+        timer("unjump",1000)
+        entity():emitSound("npc/dog/dog_footstep3.wav",90,120)
+    }
+    
+    Step_Lerp+=entity():vel():length()*(0.003-0.0015*Shift)
+    if(Step_Lerp>=1){
+        if(Moving){
+            Step_Lerp=0
+            Step=!Step
+            if(changed(Step)){
+                if(TransformVal==1){
+                    entity():emitSound("player/footsteps/duct1.wav",90,85)
+                }
+            }
+        }
+    }
+    if(changed(On_Ground)&On_Ground&Transform){
+        entity():emitSound("physics/metal/metal_barrel_impact_hard2.wav",90,80)
+    }
+    Step_Lerp=clamp(Step_Lerp,0,1)
+    entity():propGravity(!On_Ground|TransformVal==0)
+    local Stand_Force=(vec(0,0,15-Distance)*10)*On_Ground
+    local Damping_Force=-entity():vel()*vec(0.45,0.45,0.8)*On_Ground
+    local Move_Force=(Movement_Direction)*((Shift ? Run_Speed : Walk_Speed)/(5-1*Shift))
+    if(TransformVal>0){
+        entity():applyForce(((Ground_Ranger:entity():vel()*vec(0.5,0.5,0.25))+Stand_Force+Damping_Force+Move_Force)*entity():mass()*TransformVal)
+    }else{
+        entity():applyForce(ang(0,owner():eyeAngles():yaw(),0):forward()*(W-S)*15*entity():mass())
+        entity():applyTorque(entity():toLocalAxis(vec(0,0,200*(A-D)))*entity():mass())
+    }
+    
+    
+    if(Moving){
+        HoldAng=Movement_Direction:toAngle():setYaw(Driver:eyeAngles():yaw()*Driver:keyBack()+max(entity():vel(),entity():forward()):toAngle():yaw()*(!Driver:keyBack()))
+    }
+    local Upright_Force=entity():toLocal(ang(0,HoldAng:yaw(),0))*25
+    local Ang_Damping_Force=-entity():angVel()
+    entity():applyAngForce((Upright_Force+Ang_Damping_Force)*entity():mass()*TransformVal)
+    holoPos(2,entity():toWorld(vec(0,0,-15+5*sin((-0.05+Step_Lerp)*180)*clamp(entity():vel():length()*0.1,0,1))*TransformVal))
+    holoAng(2,entity():toWorld(ang(clamp(entity():vel():z()*0.1,-15,15)*!On_Ground-(clamp(entity():velL():x()*0.1,-60,60)+10*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1))*On_Ground,0,(clamp(entity():velL():y()*0.15,-60,60)+5*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(Step-!Step))*On_Ground)*TransformVal))
+    holoPos(3,holoEntity(2):toWorld(vec(0,0,-2*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1))*TransformVal))
+    holoPos(5,holoEntity(2):toWorld(vec(0,0,6*TransformVal)))
+    holoPos(15,holoEntity(2):toWorld(vec(-8*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(Step-!Step)*(1-Shift*0.8)-25*Shift-25*entity():velL():x()*0.005*(1-Shift*0.5),12-15*entity():vel():z()*0.002,34*Shift+6*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(!Step)*Shift-2+1*(1-Shift*0.8)*cos((Step_Lerp)*180))*TransformVal))
+    holoPos(17,holoEntity(2):toWorld(vec(-8*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(!Step-Step)*(1-Shift*0.8)-25*Shift-25*entity():velL():x()*0.005*(1-Shift*0.5),-12+15*entity():vel():z()*0.002,34*Shift+6*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(Step)*Shift-2+1*(1-Shift*0.8)*cos((Step_Lerp)*180))*TransformVal))
+    holoAng(15,holoEntity(2):toWorld(ang(15*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(Step-!Step)*(1-Shift*1.3)+70*Shift+35*entity():velL():x()*0.005*(1-Shift*0.5),0,15-25*entity():vel():z()*0.002)*TransformVal))
+    holoAng(17,holoEntity(2):toWorld(ang(15*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(!Step-Step)*(1-Shift*1.3)+70*Shift+35*entity():velL():x()*0.005*(1-Shift*0.5),0,-15+25*entity():vel():z()*0.002)*TransformVal))
+    
+    Step_Distance=entity():vel()*On_Ground*(2-1*Shift)
+    Delta2=(curtime()-Delta)*2*clamp(entity():vel():length()*0.1,0,1)
+    if(Step){
+        LStride=mix(-(Step_Distance),(Step_Distance),Step_Lerp)*Delta2
+    }else{
+        LStride=bezier(-(Step_Distance),vec(0,0,12/Delta2),
+        (Step_Distance),(Step_Lerp+0.2))*Delta2*clamp(entity():vel():length()*0.1,0,1)
+    }
+    
+    if(!Step){
+        RStride=mix(-(Step_Distance),(Step_Distance),Step_Lerp)*Delta2
+    }else{
+        RStride=bezier(-(Step_Distance),vec(0,0,12/Delta2),
+        (Step_Distance),(Step_Lerp+0.2))*Delta2*clamp(entity():vel():length()*0.1,0,1)
+    }
+    Delta=curtime()
+    holoPos(7,holoEntity(1):toWorld(vec(0,8,-Distance)*TransformVal+RStride:rotateAroundAxis(vec(0,0,1),-entity():angles():yaw())*TransformVal))
+    holoPos(9,holoEntity(1):toWorld(vec(0,-8,-Distance)*TransformVal+LStride:rotateAroundAxis(vec(0,0,1),-entity():angles():yaw())*TransformVal))
+    holoAng(7,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*Step*On_Ground*TransformVal,0,0)))
+    holoAng(9,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*!Step*On_Ground*TransformVal,0,0)))
+    
+    #Seat:driver():plySetPos(vec(7777777))
+}
+if(clk("unjump")){
+    Jumping=0
+}
