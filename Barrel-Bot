@@ -306,6 +306,7 @@ if(first()){
     print("Space - Jump")
     print("R - Transform")
     print("Mouse1 - Spin")
+    print("T - Dance")
     
     timer("update",50)
 }elseif(clk("update")){
