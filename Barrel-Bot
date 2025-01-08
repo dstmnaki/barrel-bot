@@ -1,6 +1,6 @@
 @name Barrel-Bot
 @model models/props_c17/oildrum001.mdl
-@persist [DriverTarget Seat]:entity Step_Lerp Step Transform TransformVal HoldAng:angle Jumping Delta Delta2 W S A D Shift SpinMix Spin2
+@persist [DriverTarget Seat HitProp]:entity Step_Lerp Step Transform TransformVal HoldAng:angle Jumping Delta Delta2 W S A D Shift SpinMix Spin2
 @persist [Walk_Speed Run_Speed]
 if(first()){
     
@@ -15,7 +15,15 @@ if(first()){
     Seat:setPos(entity():toWorld(vec(0,0,0)))
     Seat:setAng(entity():angles())
     
+    propSpawnUndo(0)
+    HitProp=propSpawn("models/hunter/plates/plate150.mdl",entity():toWorld(vec(0,0,35)),entity():toWorld(ang()),0)
+    HitProp:setMass(5)
+    HitProp:propInertia(vec(5))
+    HitProp:propGravity(0)
+    HitProp:setAlpha(0)
+    
     noCollideAll(entity(),0)
+    noCollide(entity(),HitProp)
     noCollideAll(Seat,1)
     DriverTarget = owner()#findPlayerByName("naki")#owner()#
     
@@ -415,6 +423,7 @@ if(first()){
     holoAng(15,holoEntity(2):toWorld(ang(15*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(Step-!Step)*(1-Shift*1.3)*(1-SpinMix)+70*Shift*(1-SpinMix)+35*entity():velL():x()*0.005*(1-Shift*0.5)*(1-SpinMix),0,65*clamp(SpinMix*2.5,0,1)+15-25*entity():vel():z()*0.002*(1-SpinMix))*TransformVal))
     holoAng(17,holoEntity(2):toWorld(ang(15*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(!Step-Step)*(1-Shift*1.3)*(1-SpinMix)+70*Shift*(1-SpinMix)+35*entity():velL():x()*0.005*(1-Shift*0.5)*(1-SpinMix),0,-65*clamp(SpinMix*2.5,0,1)-15+25*entity():vel():z()*0.002*(1-SpinMix))*TransformVal))
     
+    
     Step_Distance=entity():vel()*On_Ground*(2-1*Shift)
     Delta2=(curtime()-Delta)*2*clamp(entity():vel():length()*0.1,0,1)
     if(Step){
@@ -435,6 +444,10 @@ if(first()){
     holoPos(9,holoEntity(1):toWorld(vec(0,-8,-Distance)*TransformVal+LStride:rotateAroundAxis(vec(0,0,1),-entity():angles():yaw())*TransformVal))
     holoAng(7,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*Step*On_Ground*TransformVal,0,0)))
     holoAng(9,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*!Step*On_Ground*TransformVal,0,0)))
+    
+    HitProp:applyForce(((holoEntity(2):toWorld(vec(0,0,25))-HitProp:pos())*25-HitProp:vel())*HitProp:mass())
+    HitProp:applyAngForce((HitProp:toLocal(holoEntity(2):angles())*25-HitProp:angVel())*25*HitProp:mass())
+    noCollideAll(HitProp,!M1)
     
     #Seat:driver():plySetPos(vec(7777777))
 }
