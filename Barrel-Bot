@@ -21,6 +21,9 @@ if(first()){
     HitProp:propInertia(vec(5))
     HitProp:propGravity(0)
     HitProp:setAlpha(0)
+    rangerFilter(HitProp)
+    rangerFilter(Seat)
+    rangerPersist(1)
     
     noCollideAll(entity(),0)
     noCollide(entity(),HitProp)
