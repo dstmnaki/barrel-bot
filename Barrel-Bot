@@ -3,6 +3,10 @@
 @persist [DriverTarget Seat]:entity Step_Lerp Step Transform TransformVal HoldAng:angle Jumping Delta Delta2 W S A D Shift SpinMix Spin2
 @persist [Walk_Speed Run_Speed]
 if(first()){
+    
+    #Updates can be found here
+    #https://github.com/dstmnaki/barrel-bot/blob/main/Barrel-Bot
+    
     noCollideAll(entity(),1)
     propSpawnUndo(0)
     Seat = seatSpawn("models/nova/airboat_seat.mdl",1)
