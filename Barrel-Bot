@@ -290,6 +290,7 @@ if(first()){
     print("Shift - Run")
     print("Space - Jump")
     print("R - Transform")
+    print("Mouse1 - Spin")
     
     timer("update",50)
 }elseif(clk("update")){
