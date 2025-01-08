@@ -386,8 +386,9 @@ if(first()){
     local Stand_Force=(vec(0,0,15-Distance)*10)*On_Ground
     local Damping_Force=-entity():vel()*vec(0.45,0.45,0.8)*On_Ground
     local Move_Force=(Movement_Direction)*((Shift ? Run_Speed : Walk_Speed)/(5-1*Shift))
+    local Hover_Force=vec(0,0,clamp(-entity():vel():z()*0.15,0,999999)*SpinMix)
     if(TransformVal>0){
-        entity():applyForce(((Ground_Ranger:entity():vel()*vec(0.5,0.5,0.25))+Stand_Force+Damping_Force+Move_Force)*entity():mass()*TransformVal)
+        entity():applyForce(((Ground_Ranger:entity():vel()*vec(0.5,0.5,0.25))+Stand_Force+Damping_Force+Move_Force+Hover_Force)*entity():mass()*TransformVal)
     }else{
         entity():applyForce(ang(0,owner():eyeAngles():yaw(),0):forward()*(W-S)*15*entity():mass())
         entity():applyTorque(entity():toLocalAxis(vec(0,0,200*(A-D)))*entity():mass())
@@ -401,7 +402,7 @@ if(first()){
     local Ang_Damping_Force=-entity():angVel()
     entity():applyAngForce((Upright_Force+Ang_Damping_Force)*entity():mass()*TransformVal)
     holoPos(2,entity():toWorld(vec(0,0,-15+5*sin((-0.05+Step_Lerp)*180)*clamp(entity():vel():length()*0.1,0,1))*TransformVal))
-    holoAng(2,entity():toWorld(ang(0,Spin,0):rotateAroundAxis(vec(0,1,0),10)*SpinMix+ang(clamp(entity():vel():z()*0.1,-15,15)*!On_Ground-(clamp(entity():velL():x()*0.1,-60,60)*(1-SpinMix)+10*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix))*On_Ground,0,(clamp(entity():velL():y()*0.15,-60,60)*(1-SpinMix)+5*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix)*(Step-!Step))*On_Ground)*TransformVal))
+    holoAng(2,entity():toWorld(ang(0,Spin,0):rotateAroundAxis(vec(0,1,0),10*On_Ground)*SpinMix+ang(clamp(entity():vel():z()*0.1,-15,15)*!On_Ground*(1-SpinMix)-(clamp(entity():velL():x()*0.1,-60,60)*(1-SpinMix)+10*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix))*On_Ground,0,(clamp(entity():velL():y()*0.15,-60,60)*(1-SpinMix)+5*sin(Step_Lerp*180)*clamp(entity():vel():length()*0.1,0,1)*(1-SpinMix)*(Step-!Step))*On_Ground)*TransformVal))
     holoPos(3,holoEntity(2):toWorld(vec(0,0,-2*abs(sin((Step_Lerp-0.1)*180))*clamp(entity():vel():length()*0.1,0,1))*TransformVal))
     holoPos(5,holoEntity(2):toWorld(vec(0,0,6*TransformVal)))
     holoAng(5,holoEntity(2):toWorld(ang(0,holoEntity(2):toLocal(Driver:eyeAngles()):yaw(),0)*TransformVal))
