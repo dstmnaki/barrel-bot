@@ -2,6 +2,7 @@
 @model models/props_c17/oildrum001.mdl
 @persist [DriverTarget Seat HitProp]:entity Step_Lerp Step Transform TransformVal HoldAng:angle Jumping Delta Delta2 W S A D Shift SpinMix Spin2
 @persist [Walk_Speed Run_Speed]
+if(dupefinished()){reset()}
 if(first()){
     
     #Updates can be found here
