@@ -20,7 +20,7 @@ if(first()){
     HitProp:setMass(5)
     HitProp:propInertia(vec(5))
     HitProp:propGravity(0)
-    #HitProp:setAlpha(0)
+    HitProp:setAlpha(0)
     rangerFilter(HitProp)
     rangerFilter(Seat)
     rangerPersist(1)
