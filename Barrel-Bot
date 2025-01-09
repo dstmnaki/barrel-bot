@@ -27,7 +27,7 @@ if(first()){
     rangerPersist(1)
     
     noCollideAll(entity(),0)
-    #noCollide(entity(),HitProp)
+    noCollide(entity(),HitProp)
     noCollideAll(Seat,1)
     DriverTarget = owner()#findPlayerByName("naki")#owner()#
     
