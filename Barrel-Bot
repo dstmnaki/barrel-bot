@@ -454,7 +454,7 @@ if(first()){
     holoAng(7,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*Step*On_Ground*TransformVal,0,0)))
     holoAng(9,holoEntity(1):toWorld(ang(-(10+6*clamp(sin(Step_Lerp*135)*1.3,0,1))*clamp(sin(Step_Lerp*200)*1.2,0,1)*clamp(entity():vel():length()*0.1,0,1)*!Step*On_Ground*TransformVal,0,0)))
     
-    HitProp:applyForce(((holoEntity(2):toWorld(vec(0,0,25))-HitProp:pos())*25-HitProp:vel())*HitProp:mass())
+    HitProp:applyForce(((holoEntity(2):toWorld(vec(0,0,25))-HitProp:pos())*25-HitProp:vel())*0.5*HitProp:mass())
     HitProp:applyAngForce((HitProp:toLocal(holoEntity(2):angles())*25-HitProp:angVel())*25*HitProp:mass())
     if(!M1){
         HitProp:setPos((entity():pos()+vec(0,0,5)))
