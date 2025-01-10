@@ -430,7 +430,11 @@ if(first()){
     
     if(RotateMix==1){
         if(M1&((curtime()-Delta3)>0.25)){
-            entity():shootComBall(holoEntity(25):pos()+holoEntity(25):up()*25,holoEntity(25):up()*1000)
+            #ifdef entity:shootCombBall(vector,vector)
+                entity():shootComBall(holoEntity(25):pos()+holoEntity(25):up()*25,holoEntity(25):up()*1000)
+            #else
+                
+            #endif
             entity():soundPlay("shoot",0,"weapons/physcannon/energy_sing_flyby2.wav")
             Delta3=curtime()
         }
