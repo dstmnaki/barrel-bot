@@ -80,10 +80,11 @@ if(first()){
     holoClipEnabled(I,1,1)
     holoClipEnabled(I,2,1)
     holoClipEnabled(I,3,1)
+    holoClipEnabled(I,4,1)
     holoClip(I,1,vec(0,0,11),vec(0,0,1),0)
     holoClip(I,2,vec(0,0,11+23),vec(0,0,-1),0)
     holoClip(I,3,vec(5,0,11),vec(1,0,0),0)
-    holoClip(I,3,vec(13,0,11),vec(-1,0,0),0)
+    holoClip(I,4,vec(13,0,11),vec(-1,0,0),0)
     holoParent(I,E)
     
     I = 4
@@ -430,10 +431,10 @@ if(first()){
     
     if(RotateMix==1){
         if(M1&((curtime()-Delta3)>0.25)){
-            #ifdef entity:shootCombBall(vector,vector)
+            #ifdef entity:shootComBall(vector,vector)
                 entity():shootComBall(holoEntity(25):pos()+holoEntity(25):up()*25,holoEntity(25):up()*1000)
             #else
-                
+                shootBolt(holoEntity(25):pos()+holoEntity(25):up()*25,holoEntity(25):up():toAngle())
             #endif
             entity():soundPlay("shoot",0,"weapons/physcannon/energy_sing_flyby2.wav")
             Delta3=curtime()
